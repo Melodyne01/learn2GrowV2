@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-margin-left">
+    <h1>{{ quizz.title }}</h1>
+    <p>Question {{ currentIndex }} sur {{ totalQuestions }}</p>
+    <h2>{{ question.question }}</h2>
+
+    <form method="POST">
+        {% for answer in answers %}
+            <div class="uk-margin">
+                <label>
+                    <input class="uk-radio" type="radio" name="answer" value="{{ answer.id }}" required>
+                    {{ answer.name }}
+                </label>
+            </div>
+        {% endfor %}
+        <button class="uk-margin uk-padding-remove uk-button uk-width-1-1 uk-margin-large-top uk-button-success" type="submit">Suivant</button>
+    </form>
+</div>
+{% endblock %}

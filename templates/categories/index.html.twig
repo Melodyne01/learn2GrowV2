@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-container">
+    <h1>My Categories</h1>
+    {{ form_start(form) }}
+    <div class="uk-width-1-1">
+        
+        <h2>Name</h2>
+        {% if form_errors(form.name) %}
+            <div class="formError">{{ form_errors(form.name) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+        <button type="submit" class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success">Create</button>
+
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Created At</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{category.name}}</td>
+                <td>{{category.createdAt|date("Y-m-d")}}</td>
+                <td><a href="#"><span uk-icon="file-edit"></span></a></td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

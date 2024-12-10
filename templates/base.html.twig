@@ -2,16 +2,107 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <title>{% block title %}Learn2Grow | Learn, Grow, Succeed{% endblock %}</title>
+        <link rel="icon" href="">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
         {% block stylesheets %}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="uk-height-large " uk-height-viewport="expand: true">
+            <nav class="uk-navbar-container uk-visible@s">
+                <div class="uk-container">
+                    <div uk-navbar>
+                        <div class="uk-navbar-center">
+                            <div class="uk-navbar-center-left">
+                            </div>
+                            <a class="uk-navbar-item uk-logo" href="{{path('app_home')}}"><img src="{{ asset('images/logo.png') }}" width="120"  alt=""></a>
+                            <div class="uk-navbar-center-right">
+                                <ul class="uk-navbar-nav">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div uk-grid>
+                <div class="uk-width-1-4@m uk-width-1-6@l uk-visible@s">
+                    <div class="sidebar uk-card-default uk-card-body">
+                        <ul class="uk-nav-default" uk-nav>
+                            <li class="uk-nav-header">les formations</li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span>Notre séléction pour vous</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: more"></span>Notre tendances du moment</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span>Les nouveautés</a></li>
+                            <li><a href="{{path('app_leaderboards')}}"><span class="uk-margin-small-right" uk-icon="icon: world"></span>Leaderboard</a></li>
+                            <li><a href="{{path('app_quizzes')}}"><span class="uk-margin-small-right" uk-icon="icon: table"></span>Toutes les formations</a></li>
+                            
+                            <li class="uk-nav-divider"></li>
+                            <li class="uk-nav-header">Mon parcours</li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: tag"></span>Mes objectifs</a></li>
+                            <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span>Mon bilan</a></li>
+                            <li><a href="{{path('app_my_certificates')}}"><span class="uk-margin-small-right" uk-icon="icon: star"></span>Mes certifications</a></li>
+                            <li><a href="{{path('app_quizzes_create')}}"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>New Quizz</a></li>
+                            <li><a href="{{path('app_my_quizzes')}}"><span class="uk-margin-small-right" uk-icon="icon: pencil"></span>My Quizzes</a></li>
+                            <!--<li class="uk-active"><a href="{{path('app_sub_categories')}}">My categories</a></li>-->
+
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="{{path('app_profile')}}"><img class="uk-margin-small-right uk-border-circle" src="{{ asset('images/photo2.jpg') }}" width="30" height="30" alt="Border pill">Mon compte</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <nav class="uk-navbar-container uk-width-1-1@s uk-hidden@s">
+                    <div class="uk-container">
+                        <div uk-navbar>
+                            <div class="uk-navbar-left">
+                                <a class="uk-navbar-toggle uk-navbar-toggle-animate" uk-navbar-toggle-icon href="#"></a>
+                                <div class="uk-navbar-dropdown">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li class="uk-nav-header">les formations</li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: grid"></span>Notre séléction pour vous</a></li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: more"></span>Notre tendances du moment</a></li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: bell"></span>Les nouveautés</a></li>
+                                        <li><a href="{{path('app_leaderboards')}}"><span class="uk-margin-small-right" uk-icon="icon: world"></span>Leaderboard</a></li>
+                                        <li><a href="{{path('app_quizzes')}}"><span class="uk-margin-small-right" uk-icon="icon: table"></span>Toutes les formations</a></li>
+                                        
+                                        <li class="uk-nav-divider"></li>
+                                        <li class="uk-nav-header">Mon parcours</li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: tag"></span>Mes objectifs</a></li>
+                                        <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span>Mon bilan</a></li>
+                                        <li><a href="{{path('app_my_certificates')}}"><span class="uk-margin-small-right" uk-icon="icon: star"></span>Mes certifications</a></li>
+                                        <li><a href="{{path('app_quizzes_create')}}"><span class="uk-margin-small-right" uk-icon="icon: plus"></span>New Quizz</a></li>
+                                        <li><a href="{{path('app_my_quizzes')}}"><span class="uk-margin-small-right" uk-icon="icon: pencil"></span>My Quizzes</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="{{path('app_profile')}}"><img class="uk-margin-small-right uk-border-circle" src="{{ asset('images/photo2.jpg') }}" width="30" height="30" alt="Border pill">Mon compte</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="uk-navbar-center">
+                    
+                                <ul class="uk-navbar-nav">
+                                    <li>
+                                        <a class="uk-navbar-item uk-logo" href="{{path('app_home')}}"><img src="{{ asset('images/logo.png') }}" width="120"  alt=""></a>
+                                    </li>
+                                </ul>
+                
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="uk-width-3-4@m uk-width-5-6@l uk-width-1-1@s uk-margin">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </body>
 </html>

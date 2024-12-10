@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-section uk-section-muted">
+    <div class="uk-container">
+        <h3>General leaderboard</h3>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Certifications</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for user in leaderboard %}
+            <tr>
+                <td>{{user.firstname}}</td>
+                <td>{{user.lastname}}</td>
+                <td>{{user.certificationCount}}</td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

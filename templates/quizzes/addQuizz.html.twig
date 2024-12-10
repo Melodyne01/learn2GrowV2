@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-container">
+    <h1>NEW QUIZZ</h1>
+    {{ form_start(form) }}
+
+    <div class="uk-width-1-1">
+        
+        <h2>Title</h2>
+        {% if form_errors(form.title) %}
+            <div class="formError">{{ form_errors(form.title) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.title) }}
+            </div>
+        </div>
+        <h2>Category</h2>
+        {% if form_errors(form.subCategory) %}
+            <div class="formError">{{ form_errors(form.subCategory) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.subCategory) }}
+            </div>
+        </div>
+        <h2>Dificulty</h2>
+        {% if form_errors(form.dificulty) %}
+            <div class="formError">{{ form_errors(form.dificulty) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.dificulty) }}
+            </div>
+        </div>        
+        <h2>Description</h2>
+        {% if form_errors(form.description) %}
+            <div class="formError">{{ form_errors(form.description) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.description) }}
+            </div>
+        </div> 
+
+        <h2>Questions</h2>
+        <ul class="questions"
+            data-index="{{ form.questions|length > 0 ? form.questions|last.vars.name + 1 : 0 }}"
+            data-prototype="{{ form_widget(form.questions.vars.prototype)|e('html_attr') }}">
+            <li>
+                <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                        {{ form_widget(form.questions) }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <button type="button" class="add_item_link uk-button uk-width-1-1 uk-margin-large-top uk-button-success" data-collection-holder-class="questions">Add a question</button>
+
+        <button type="submit" class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success">Valider</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+<script>
+    document
+  .querySelectorAll('.add_item_link')
+  .forEach(btn => {
+      btn.addEventListener("click", addFormToCollection)
+  });
+  function addFormToCollection(e) {
+  const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+  const item = document.createElement('li');
+
+  item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(
+      /__name__/g,
+      collectionHolder.dataset.index
+    );
+
+  collectionHolder.appendChild(item);
+
+  collectionHolder.dataset.index++;
+};
+</script>
+{% endblock %}

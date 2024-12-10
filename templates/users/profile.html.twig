@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-section uk-section-muted">
+    <div class="uk-container">
+        <h3>My informations</h3>
+        <div class="uk-margin">
+            <img class="uk-margin-small-right uk-border-circle" src="{{ asset('images/photo2.jpg') }}" width="150" height="150" alt="Border pill">
+        </div>
+        <form class="uk-grid-small" uk-grid>
+            <div class="uk-width-1-2@s">
+                <input class="uk-input" type="text" placeholder="{{user.firstname}}" aria-label="50" disabled>
+            </div>
+            <div class="uk-width-1-2@s">
+                <input class="uk-input" type="text" placeholder="{{user.lastname}}" aria-label="50" disabled>
+            </div>
+            <div class="uk-width-1-1">
+                <input class="uk-input" type="text" placeholder="{{user.email}}" aria-label="100" disabled>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="uk-section uk-section-default">
+    <div class="uk-container">
+        <h3>My certificates</h3>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>Quizz</th>
+                    <th>Created At</th>
+                    <th>Obtained on </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for certification in certifications %}
+                    <tr>
+                        <td>{{certification.quizz.title|length > 60 ? certification.quizz.title|slice(0, 60) ~ '...' : certification.quizz.title}}</td>
+                        <td>{{certification.result}}%</td>
+                        <td>{{certification.createdAt|date("Y-m-d")}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

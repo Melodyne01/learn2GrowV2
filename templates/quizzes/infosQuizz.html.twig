@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-container uk-margin-top">
+    <h1>{{quizz.title}}</h1>
+    <dl class="uk-description-list uk-description-list-divider">
+        <h3>Description</h3>
+        <dd class="uk-text-justify">{{quizz.description}}</dd>
+    </dl>
+    <a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="#modal-center" uk-toggle>Lets go!</a>
+    <a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quizz</a>
+
+    <div id="modal-center" class="uk-flex-top" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div>
+                <p>Are you sure you want to start ?</p>
+                <div class="uk-text-center" uk-grid>
+                    <div class="uk-width-1-2">
+                        <div class=""><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="#modal-center" uk-toggle>No</a></div>
+                    </div>
+                    <div class="uk-width-1-2">
+                        <div class=""><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('quiz_question', {id:quizz.id, questionNumber:firstQuestion.id})}}" uk-toggle>Lets go!</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-section uk-section-muted">
+    <div class="uk-container">
+        <h3>Leaderboard of : {{quizz.title}}</h3>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Result</th>
+                    <th>Certified At</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for certification in certifications %}
+            <tr>
+                <td>{{certification.user.firstname}}</td>
+                <td>{{certification.user.lastname}}</td>
+                <td>{{certification.result}}%</td>
+                <td>{{certification.createdAt|date("Y-m-d")}}</td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

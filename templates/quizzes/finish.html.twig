@@ -1,0 +1,120 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% if result >= 50 %}
+<canvas id="confetti-canvas"></canvas>
+<div class="uk-container" id="confetti-container">
+    <div class="uk-child-width-1-1 uk-text-center uk-margin-large-top" uk-grid>
+        <h1>Congratulations!</h1>
+        <div class="uk-animation-toggle" tabindex="0">
+            <div class="uk-animation-shake">
+                <img class="badge" src="{{ asset('images/badge.png') }}" width="300" alt="">
+            </div>
+        </div>
+        <div>
+            <h3>New Badge!</h3>
+            <h3>{{result}}%</h3>
+            <p>Thank you for participating in the quiz : {{ quizz.title }}</p>
+            <div uk-grid>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{ path('app_quizzes') }}">Back to quizzes</a></div>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quizz</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="uk-container">
+    <div class="uk-child-width-1-1 uk-text-center uk-margin-large-top" uk-grid>
+        <h1>Better Luck Next Time!</h1>
+        <div class="uk-animation-toggle" tabindex="0">
+            <div class="uk-animation-shake">
+                <img class="badge" src="{{ asset('images/sadface.png') }}" width="300" alt="Try Again">
+            </div>
+        </div>
+        <div>
+            <h3>Your Score: {{ result }}%</h3>
+            <p>Thank you for participating in the quiz : {{ quizz.title }}</p>
+            <div uk-grid>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{ path('app_quizzes') }}">Back to quizzes</a></div>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quizz</a></div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Redimensionner le canvas pour correspondre à la taille de la fenêtre
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Générer des confettis
+    const confettis = [];
+    const colors = ['#FF5733', '#FFC300', '#DAF7A6', '#FF33FF', '#33FFFC', '#85C1E9'];
+
+    for (let i = 0; i < 150; i++) {
+        confettis.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 6 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            dx: Math.random() * 4 - 2, // Vitesse horizontale
+            dy: Math.random() * 4 + 2, // Vitesse verticale
+            tilt: Math.random() * 10 - 5,
+        });
+    }
+
+    // Dessiner les confettis
+    function drawConfettis() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        confettis.forEach((confetti) => {
+            ctx.beginPath();
+            ctx.arc(confetti.x, confetti.y, confetti.radius, 0, Math.PI * 2);
+            ctx.fillStyle = confetti.color;
+            ctx.fill();
+        });
+    }
+
+    // Mettre à jour les confettis
+    function updateConfettis() {
+        confettis.forEach((confetti) => {
+            confetti.x += confetti.dx;
+            confetti.y += confetti.dy;
+
+            // Faire "rebondir" les confettis
+            if (confetti.x > canvas.width || confetti.x < 0) {
+                confetti.dx = -confetti.dx;
+            }
+
+            if (confetti.y > canvas.height) {
+                confetti.y = 0;
+                confetti.x = Math.random() * canvas.width;
+            }
+        });
+    }
+
+    // Boucle d'animation
+    function animate() {
+        drawConfettis();
+        updateConfettis();
+        requestAnimationFrame(animate);
+    }
+
+    // Démarrer l'animation
+    animate();
+});
+</script>
+{% endblock %}

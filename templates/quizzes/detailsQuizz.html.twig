@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="uk-container">
+    <h1>{{quizz.title}}</h1>
+    {{ form_start(form) }}
+    <div class="uk-width-1-1">
+        <h2>Title</h2>
+        {% if form_errors(form.title) %}
+            <div class="formError">{{ form_errors(form.title) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.title) }}
+            </div>
+        </div>
+        <h2>Category</h2>
+        {% if form_errors(form.subCategory) %}
+            <div class="formError">{{ form_errors(form.subCategory) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.subCategory) }}
+            </div>
+        </div>
+        <h2>Dificulty</h2>
+        {% if form_errors(form.dificulty) %}
+            <div class="formError">{{ form_errors(form.dificulty) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.dificulty) }}
+            </div>
+        </div>
+        <h2>Description</h2>
+        {% if form_errors(form.description) %}
+            <div class="formError">{{ form_errors(form.description) }}</div>
+        {% endif %}
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {{ form_widget(form.description) }}
+            </div>
+        </div>      
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                {% for question in form.questions %}
+                    <li>
+                        <h3>Question {{ loop.index }}</h3>
+                        <div>
+                            {{ form_widget(question.question) }}
+                            <ul class="uk-list">
+                                {% for answer in question.answers %}
+                                    <li>
+                                        {{ form_widget(answer.name) }}
+                                        {{ form_widget(answer.isGoodAnswer) }}
+                                    </li>
+                                    <hr class="uk-divider-icon">
+                                {% endfor %}
+                            </ul>
+    
+                            <button type="button" class="uk-button uk-button-primary add-answer" 
+                                    data-prototype="{{ form_widget(question.answers.vars.prototype)|e('html_attr') }}"
+                                    data-index="{{ question.answers|length }}">
+                                Add a answer
+                            </button>
+                        </div>
+                        <hr class="uk-divider-icon">
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success">Submit</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Gestion de l'ajout dynamique des réponses
+        document.querySelectorAll('.add-answer').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const prototype = button.dataset.prototype;
+                const index = button.dataset.index;
+
+                const newForm = prototype.replace(/__name__/g, index);
+                const list = button.previousElementSibling;
+
+                // Ajout de la réponse au DOM
+                const listItem = document.createElement('li');
+                listItem.innerHTML = newForm;
+                list.appendChild(listItem);
+
+                // Mise à jour de l'index
+                button.dataset.index = parseInt(index) + 1;
+            });
+        });
+    });
+</script>
+{% endblock %}
