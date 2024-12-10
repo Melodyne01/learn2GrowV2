@@ -201,7 +201,8 @@ class QuizzesController extends AbstractController
             $nextQuestionQuizz = $this->questionRepo->findOneBy([
                 "id" => $questionNumber + 1
             ]);
-            if($nextQuestionQuizz->getQuizz()->getId() != $quizz->getId()){
+            
+            if($nextQuestionQuizz == null || $nextQuestionQuizz->getQuizz()->getId() != $quizz->getId()){
                 return $this->redirectToRoute('quiz_finish', ['id' => $quizz->getId()]);
             }
             // Passer à la question suivante

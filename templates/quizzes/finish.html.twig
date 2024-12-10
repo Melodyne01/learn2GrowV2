@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% if result >= 50 %}
+{% if result >= 60 %}
 <canvas id="confetti-canvas"></canvas>
 <div class="uk-container" id="confetti-container">
     <div class="uk-child-width-1-1 uk-text-center uk-margin-large-top" uk-grid>
@@ -20,7 +20,7 @@
             <p>Thank you for participating in the quiz : {{ quizz.title }}</p>
             <div uk-grid>
                 <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{ path('app_quizzes') }}">Back to quizzes</a></div>
-                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quizz</a></div>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quiz</a></div>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <p>Thank you for participating in the quiz : {{ quizz.title }}</p>
             <div uk-grid>
                 <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{ path('app_quizzes') }}">Back to quizzes</a></div>
-                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quizz</a></div>
+                <div class="uk-width-1-2"><a class="uk-button uk-width-1-1 uk-margin-large-top uk-button-success" href="{{path('app_quizz_leaderboard', {id:quizz.id})}}">Leaderboard of the quiz</a></div>
             </div>
             
         </div>
