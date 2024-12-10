@@ -176,7 +176,7 @@ class QuizzesController extends AbstractController
         ]);
 
         // Vérifier si la question demandée existe
-        if (!isset($question)|| $isAlreadyCertificate != null) {
+        if (!isset($question)) {
             return $this->redirectToRoute('quiz_finish', ['id' => $quizz->getId()]);
         }
 
@@ -198,7 +198,12 @@ class QuizzesController extends AbstractController
                 $this->manager->getManager()->persist($userAnswer);
                 $this->manager->getManager()->flush();
             }
-
+            $nextQuestionQuizz = $this->questionRepo->findOneBy([
+                "id" => $questionNumber + 1
+            ]);
+            if($nextQuestionQuizz->getQuizz()->getId() != $quizz->getId()){
+                return $this->redirectToRoute('quiz_finish', ['id' => $quizz->getId()]);
+            }
             // Passer à la question suivante
             return $this->redirectToRoute('quiz_question', [
                 'id' => $quizz->getId(),

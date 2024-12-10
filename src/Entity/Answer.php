@@ -76,6 +76,13 @@ class Answer
         return $this;
     }
 
+    public function setIsGoodAnswer(bool $isGoodAnswer): static
+    {
+        $this->isGoodAnswer = $isGoodAnswer;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, UserAnswer>
      */
