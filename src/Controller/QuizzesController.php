@@ -241,18 +241,24 @@ class QuizzesController extends AbstractController
             'quizz' => $quizz,
             'user' => $this->getUser()
         ]);
+        $result = 0;
+        if($goodAnswers > 0){
+           $result = (int)(($goodAnswers/$totalQuestions)*100);
+        }
         $result = (int)(($goodAnswers/$totalQuestions)*100);
 
+        if($result>=60){
+            $certification = new Certification();
+            $certification->setQuizz($quizz);
+            $certification->setUser($this->getUser());
+            $certification->setResult($result);
+            $certification->setCreatedAt(new DateTime('now', new DateTimeZone('Europe/Paris')));
+            $this->manager->getManager()->persist($certification);
+            $this->manager->getManager()->flush();
+        }
+        
         if($isAlreadyCertificate == null){
-            if($result>=50){
-                $certification = new Certification();
-                $certification->setQuizz($quizz);
-                $certification->setUser($this->getUser());
-                $certification->setResult($result);
-                $certification->setCreatedAt(new DateTime('now', new DateTimeZone('Europe/Paris')));
-                $this->manager->getManager()->persist($certification);
-                $this->manager->getManager()->flush();
-            }
+           
         }
 
         return $this->render('quizzes/finish.html.twig', [
