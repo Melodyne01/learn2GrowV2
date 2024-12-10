@@ -27,7 +27,7 @@
                         <div class="uk-card uk-card-default uk-height-entire-page uk-width-1-3@l uk-width-1-2@m uk-width-2-3@s uk-align-right uk-card-body">
                             <a href="{{path('app_home')}}" class="uk-icon-link" uk-icon="chevron-left"></a>
                             <a class="uk-link-reset" href="{{path('app_home')}}">Back</a>
-                            <div class="errorMessage">
+                            {# <div class="errorMessage">
                                 {% for message in app.flashes("danger") %}
                                 <div class="uk-alert-danger" uk-alert>
                                     <a href class="uk-alert-close" uk-close></a>
@@ -40,7 +40,7 @@
                                     <p>{{ message }}</p>
                                 </div>
                                 {% endfor %}
-                            </div>
+                            </div> #}
                             <ul class="uk-subnav uk-subnav-pill" uk-switcher>
                                 <li><a href="#">Login</a></li>
                                 <li><a href="#">Register</a></li>
