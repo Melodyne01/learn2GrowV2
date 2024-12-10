@@ -20,9 +20,9 @@
                     </div>
                     <div>
                         <ul class="uk-subnav uk-subnav-pill" uk-margin>
-                            <li uk-filter-control="[data-dificulty='Beginner']"><a href="#">Beginner</a></li>
-                            <li uk-filter-control="[data-dificulty='Intermediate']"><a href="#">Intermediate</a></li>
-                            <li uk-filter-control="[data-dificulty='Expert']"><a href="#">Expert</a></li>
+                            <li uk-filter-control="[data-difficulty='Beginner']"><a href="#">Beginner</a></li>
+                            <li uk-filter-control="[data-difficulty='Intermediate']"><a href="#">Intermediate</a></li>
+                            <li uk-filter-control="[data-difficulty='Expert']"><a href="#">Expert</a></li>
                         </ul>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
         </div>
         <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m" uk-grid="masonry: true">
             {% for quizz in quizzes %}
-            <li data-dificulty="{{quizz.dificulty}}" data-category="{{quizz.subCategory.category.name}}" data-date="{{quizz.createdAt|date("Y-m-d")}}" data-name="{{quizz.title}}">
+            <li data-difficulty="{{quizz.difficulty}}" data-category="{{quizz.subCategory.category.name}}" data-date="{{quizz.createdAt|date("Y-m-d")}}" data-name="{{quizz.title}}">
                 <a href="{{path('app_quizzes_infos', {id:quizz.id})}}">
                     <div class="uk-card uk-card-default uk-card-body uk-padding-remove">
                         <div class="uk-card-media-top">
@@ -50,7 +50,7 @@
                             <h3 class="uk-card-title uk-text-truncate">{{quizz.title}}</h3>
                             <div class="uk-card-footer">
                                 <div class="uk-position-small uk-position-top-right"><a href="{{path('app_quizzes_details', {id:quizz.id})}}">Edit</a></div>
-                                <div class="uk-position-small uk-position-bottom-left">{{quizz.dificulty}}</div>
+                                <div class="uk-position-small uk-position-bottom-left">{{quizz.difficulty}}</div>
                                 <div class="uk-position-small uk-position-bottom-right">{{quizz.createdAt|date("Y-m-d")}}</div>
                                 <div class="uk-position-small uk-position-bottom-left"></div>
                                 <div class="uk-position-small uk-position-bottom-right"></div>

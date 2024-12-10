@@ -30,7 +30,7 @@ class CreateQuizzType extends AbstractType
             ->add('title', TextType::class, [
                 'attr' => ['class' => 'uk-input', 'label' => false],
             ])
-            ->add('dificulty', ChoiceType::class, [
+            ->add('difficulty', ChoiceType::class, [
                 'choices'  => [
                     'Beginner' => 'Beginner',
                     'Intermediate' => 'Intermediate',
